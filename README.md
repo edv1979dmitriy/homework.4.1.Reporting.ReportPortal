@@ -88,4 +88,11 @@
 <details>
 <summary>Скриншоты</summary>
 
+<img width="1303" height="367" alt="Screenshot_27" src="https://github.com/user-attachments/assets/50fc1159-c812-46bd-8c8f-8340a76899fc" />
+
+<img width="1326" height="701" alt="Screenshot_25" src="https://github.com/user-attachments/assets/bebdcacf-037f-489e-bce9-70874a39274e" />
+
+<img width="1339" height="840" alt="Screenshot_26" src="https://github.com/user-attachments/assets/593c4222-79da-4da6-9ea6-abc744f57d30" />
+
+
 </details>
