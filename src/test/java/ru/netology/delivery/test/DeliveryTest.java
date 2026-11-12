@@ -1,11 +1,5 @@
 package ru.netology.delivery.test;
 
-import com.codeborne.selenide.logevents.SelenideLogger;
-import io.qameta.allure.Allure;
-import io.qameta.allure.Step;
-import io.qameta.allure.selenide.AllureSelenide;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import ru.netology.delivery.data.DataGenerator;
@@ -18,16 +12,6 @@ import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Selenide.$;
 
 public class DeliveryTest {
-
-    @BeforeAll
-    public static void setUpAll() {
-        SelenideLogger.addListener("allure", new AllureSelenide());
-    }
-
-    @AfterAll
-    public static void tearDownAll() {
-        SelenideLogger.removeListener("allure");
-    }
 
     @Test
     @DisplayName("Должен планировать и перепланировать встречу")
@@ -63,7 +47,6 @@ public class DeliveryTest {
         $("[data-test-id='success-notification'] .notification__content").shouldHave(exactText("Встреча успешно запланирована на " + secondDate)).shouldBe(visible);
     }
 
-    @Step
     @Test
     @DisplayName("Не должен планировать встречу на теукущую дату")
     public void shouldNoSuccessfulMeetingOnCurrentDate() {
@@ -73,14 +56,11 @@ public class DeliveryTest {
 
         open("http://localhost:9999");
 
-        Allure.step("Заполнение полей", () -> {
-            Allure.attachment("Рандомный пользователь", validUser.toString());
-            $("[data-test-id='city'] input").setValue(validUser.getCity());
-            $("[data-test-id='date'] input").doubleClick().sendKeys("DELETE");
-            $("[data-test-id='date'] input").setValue(firstDate);
-            $("[data-test-id='name'] input").setValue(validUser.getName());
-            $("[data-test-id='phone'] input").setValue(validUser.getPhone());
-        });
+        $("[data-test-id='city'] input").setValue(validUser.getCity());
+        $("[data-test-id='date'] input").doubleClick().sendKeys("DELETE");
+        $("[data-test-id='date'] input").setValue(firstDate);
+        $("[data-test-id='name'] input").setValue(validUser.getName());
+        $("[data-test-id='phone'] input").setValue(validUser.getPhone());
         $("[data-test-id='agreement'] .checkbox__text").click();
         $$("button").find(exactText("Запланировать")).click();
         $("[data-test-id='success-notification']").shouldBe(visible, Duration.ofSeconds(15));
